@@ -1,13 +1,15 @@
 {% extends 'meddata/main.html' %}
 {% load my_tags %}
 {% block content %}
+
 <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-12 col-md-8 mx-auto">
-        <h1 class="fw-light">Услуги</h1>
+        <h1 class="fw-light">Врачи</h1>
       </div>
     </div>
   </section>
+
 <div class="container">
   <div class="row">
     <div class="col-6">
@@ -17,7 +19,7 @@
           <div class="card-body">
           </div>
           <button type="submit" class="btn btn-Dark">Удалить</button>
-          <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_list' %}" role="button">Отмена</a>
+          <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:doctor_list' %}" role="button">Отмена</a>
         </div>
       </form>
     </div>

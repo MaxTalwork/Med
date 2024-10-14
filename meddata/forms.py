@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, BooleanField
 
-from meddata.models import MedService
+from meddata.models import MedService, Doctor
 
 
 class StyleFormMixin(ModelForm):
@@ -17,4 +17,10 @@ class StyleFormMixin(ModelForm):
 class MedServiceForm(StyleFormMixin, ModelForm):
     class Meta:
         model = MedService
+        fields = '__all__'
+
+
+class DoctorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Doctor
         fields = '__all__'

@@ -1,19 +1,25 @@
- <header class="p-3 mb-3 border-bottom">
+<div class="collapse text-bg-dark" id="navbarHeader">
     <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-        </a>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control" placeholder="Поиск..." aria-label="Search">
-        </form>
-
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-          </a>
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4>О нас</h4>
+          <p class="text-body-secondary">Информация о клинике</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4>Навигация</h4>
+          <ul class="list-unstyled">
+            <li><a href="{% url 'meddata:home' %}" class="text-white">Главная</a></li>
+          </ul>
         </div>
       </div>
     </div>
-  </header>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Переключить навигацию">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>

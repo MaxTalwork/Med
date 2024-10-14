@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 
-from meddata.forms import MedServiceForm
-from meddata.models import MedService
+from meddata.forms import MedServiceForm, DoctorForm
+from meddata.models import MedService, Doctor
 
 
 def home(request):
@@ -50,3 +50,42 @@ class MedServiceUpdateView(UpdateView):
 class MedServiceDeleteView(DeleteView):
     model = MedService
     success_url = reverse_lazy('meddata:medservice_list')
+
+
+class DoctorCreateView(CreateView):
+    model = Doctor
+    form_class = DoctorForm
+    success_url = reverse_lazy('meddata:doctor_list')
+
+
+class DoctorListView(ListView):
+    model = Doctor
+
+    def get_queryset(self):
+        return Doctor.objects.all()
+
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+        list_product = Doctor.objects.all()
+        context_data['object_list'] = list_product
+        return context_data
+
+
+class DoctorDetailView(DetailView):
+    model = Doctor
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.save()
+        return self.object
+
+
+class DoctorUpdateView(UpdateView):
+    model = Doctor
+    form_class = DoctorForm
+    success_url = reverse_lazy('meddata:doctor_list')
+
+
+class DoctorDeleteView(DeleteView):
+    model = Doctor
+    success_url = reverse_lazy('meddata:doctor_list')
