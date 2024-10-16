@@ -25,6 +25,7 @@ class User(AbstractUser):
     token = models.CharField(
         max_length=100, verbose_name="Token", blank=True, null=True
     )
+    is_staff = models.BooleanField(verbose_name="Сотрудник", default=False)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

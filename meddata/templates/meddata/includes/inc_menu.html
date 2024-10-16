@@ -6,7 +6,12 @@
           <p class="text-body-secondary">Информация о клинике</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
+          {%if user.is_authenticated %}
+          <h6>Вы вошли как </h6>
+          <h4>  {{ user }}</h4>
+          {% else %}
           <h4>Навигация</h4>
+          {% endif %}
           <ul class="list-unstyled">
             <li><a href="{% url 'meddata:home' %}" class="text-white">Главная</a></li>
              {%if user.is_authenticated %}

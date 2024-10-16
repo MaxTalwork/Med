@@ -1,0 +1,58 @@
+{% extends 'meddata/main.html' %}
+{% load my_tags %}
+{% block content %}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-12 col-md-8 mx-auto">
+        <h1 class="fw-light">
+            {% for comtext in object_list %}
+          {% if comtext.is_active is True %}
+          {% if comtext.mapurl is not Null %}
+           {{ comtext.adress }}</h1>
+          <img src="{{ comtext.map | media_filter}}" class="img-fluid">
+           <a href="{{ comtext.mapurl }}">Просмотреть на карте</a>
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+
+      </div>
+
+    </div>
+  </section>
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for comtext in object_list %}
+          {% if comtext.is_active is True %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text">Фамилия: {{ comtext.surname | truncatechars:100 }} </p>
+                <p class="card-text">Имя: {{ comtext.contact_name | truncatechars:100 }} </p>
+                <p class="card-text">Отчество: {{ comtext.patronymic | truncatechars:100 }} </p>
+                <p class="card-text">Телефон: {{ comtext.phone_number | truncatechars:100 }} </p>
+                <p class="card-text">Эл.почта: {{ comtext.email | truncatechars:100 }} </p>
+               <p class="card-footer">
+                    </p>
+                {%if user.is_staff %}
+              <div class="btn-group">
+                    <a class="btn btn-dark rounded-pill px-3" href="{% url 'addinfo:comtext_update' comtext.pk %}" role="button">Редактировать</a>
+                  <a class="btn btn-dark rounded-pill px-3" href="{% url 'addinfo:comtext' comtext.pk %}" role="button">Подробно</a>
+                  <a class="btn btn-dark rounded-pill px-3" href="{% url 'addinfo:comtext_delete' comtext.pk %}" role="button">Удалить</a>
+                </div>
+                  {% endif %}
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
