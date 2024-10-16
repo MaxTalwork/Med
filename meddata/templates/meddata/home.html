@@ -180,7 +180,7 @@
     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
   </symbol>
 </svg>
-
+{% include 'meddata/includes/inc_menu.html' %}
 <div class="container">
   <header class="border-bottom lh-1 py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
@@ -202,7 +202,7 @@
   <div class="nav-scroller py-1 mb-3 border-bottom">
     <nav class="nav nav-underline justify-content-between">
       <a class="nav-item nav-link link-body-emphasis active" href="#">Описание</a>
-      <a class="nav-item nav-link link-body-emphasis active" href="#">Услуги</a>
+      <a class="nav-item nav-link link-body-emphasis active" href="{% url 'meddata:medservice_list' %}">Услуги</a>
       <a class="nav-item nav-link link-body-emphasis active" href="#">Контакты</a>
       <a class="nav-item nav-link link-body-emphasis active" href="#">Обратная связь</a>
     </nav>

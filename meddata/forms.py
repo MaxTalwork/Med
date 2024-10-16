@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm, BooleanField
+from django.forms import BooleanField, ModelForm
 
-from meddata.models import MedService
+from meddata.models import Appointment, Doctor, MedService
 
 
 class StyleFormMixin(ModelForm):
@@ -9,12 +9,24 @@ class StyleFormMixin(ModelForm):
         super().__init__(*args, **kwargs)
         for fild_name, fild in self.fields.items():
             if isinstance(fild, BooleanField):
-                fild.widget.attrs['class'] = 'form-check-input'
+                fild.widget.attrs["class"] = "form-check-input"
             else:
-                fild.widget.attrs['class'] = 'form-control'
+                fild.widget.attrs["class"] = "form-control"
 
 
 class MedServiceForm(StyleFormMixin, ModelForm):
     class Meta:
         model = MedService
-        fields = '__all__'
+        fields = "__all__"
+
+
+class DoctorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Doctor
+        fields = "__all__"
+
+
+class AppointmentForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Appointment
+        fields = "__all__"
