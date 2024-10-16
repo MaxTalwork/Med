@@ -19,7 +19,7 @@
             <div class="card-body">
               <p class="card-text">Услуга: {{ service.name | truncatechars:100 }} </p>
               <p class="card-text">Описание: {{ service.description | truncatechars:100 }} </p>
-              <p class="card-text">Направление: {{ service.med_branch | truncatechars:100 }} </p>
+              <p class="card-text">Направление: {{ service.med_branch.name | truncatechars:100 }} </p>
               <p class="card-text">Врачи: {{ service.doctors | truncatechars:100 }} </p>
               <p class="card-text">Стоимость: {{ service.price | truncatechars:100 }} руб </p>
                <p class="card-footer">

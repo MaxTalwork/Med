@@ -166,6 +166,11 @@
 </header>
 
 <main>
+<div class="btn-group">
+  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_create' %}" role="button">Создать услугу</a>
+  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:doctor_create' %}" role="button">Создать врача</a>
+  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment_create' %}" role="button">Создать запись</a>
+</div>
 
 {% block content %}
 

@@ -21,7 +21,7 @@
               <p class="card-text">Фамилия: {{ doctor.surname | truncatechars:100 }} </p>
               <p class="card-text">Имя: {{ doctor.name | truncatechars:100 }} </p>
               <p class="card-text">Отчество: {{ doctor.patronymic | truncatechars:100 }} </p>
-              <p class="card-text">Направление: {{ doctor.med_branch | truncatechars:100 }} </p>
+              <p class="card-text">Направление: {{ doctor.med_branch.name | truncatechars:100 }} </p>
                <p class="card-footer">
                     </p>
               <div class="btn-group">
