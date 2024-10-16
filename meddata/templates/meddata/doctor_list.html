@@ -24,11 +24,13 @@
               <p class="card-text">Направление: {{ doctor.med_branch.name | truncatechars:100 }} </p>
                <p class="card-footer">
                     </p>
+                 {%if user.is_staff %}
               <div class="btn-group">
                     <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:doctor_update' doctor.pk %}" role="button">Редактировать</a>
                   <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:doctor' doctor.pk %}" role="button">Подробно</a>
                   <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:doctor_delete' doctor.pk %}" role="button">Удалить</a>
                 </div>
+                {% endif %}
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                 </div>

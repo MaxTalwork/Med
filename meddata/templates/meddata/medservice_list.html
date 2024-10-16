@@ -24,11 +24,15 @@
               <p class="card-text">Стоимость: {{ service.price | truncatechars:100 }} руб </p>
                <p class="card-footer">
                     </p>
-              <div class="btn-group">
+               {%if user.is_authenticated is True %}
+                 {%if user.is_staff is True %}
+               <div class="btn-group">
                     <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_update' service.pk %}" role="button">Редактировать</a>
                   <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice' service.pk %}" role="button">Подробно</a>
                   <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_delete' service.pk %}" role="button">Удалить</a>
-                </div>
+               </div>
+                 {% endif %}
+                {% endif %}
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                 </div>

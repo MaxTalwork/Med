@@ -166,11 +166,31 @@
 </header>
 
 <main>
-<div class="btn-group">
-  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_create' %}" role="button">Создать услугу</a>
-  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:doctor_create' %}" role="button">Создать врача</a>
-  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment_create' %}" role="button">Создать запись</a>
-</div>
+
+{%if user.is_staff %}
+<div class="nav-scroller py-1 mb-3 border-bottom">
+    <nav class="nav nav-underline justify-content-between">
+      <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:doctor_list' %}">Список врачей</a>
+      <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:doctor_create' %}" role="button">Добавить врача</a>
+      <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_list' %}">Список услуг</a>
+      <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_create' %}" role="button">Добавить услугу</a>
+      <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment_list' %}">Список записей</a>
+      <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment_create' %}" role="button">Добавить запись</a>
+    </nav>
+  </div>
+
+  {% else %}
+<div class="nav-scroller py-1 mb-3 border-bottom">
+    <nav class="nav nav-underline justify-content-between">
+      <a class="nav-item nav-link link-body-emphasis active" href="{% url 'meddata:doctor_list' %}">Наши врачи</a>
+      <a class="nav-item nav-link link-body-emphasis active" href="{% url 'meddata:medservice_list' %}">Список услуги</a>
+      <a class="nav-item nav-link link-body-emphasis active" href="{% url 'meddata:appointment_list' %}">Записаться на услугу</a>
+      <a class="nav-item nav-link link-body-emphasis active" href="{% url 'addinfo:comtext_list' %}">Контакты</a>
+      <a class="nav-item nav-link link-body-emphasis active" href="#">Обратная связь</a>
+    </nav>
+  </div>
+
+  {% endif %}
 
 {% block content %}
 

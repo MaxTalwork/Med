@@ -14,6 +14,7 @@
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for appointment in object_list %}
+          {%if appointment.client is NULL or user == apointment.client or user.is_staff is True or user == object.doctor%}
         <div class="col">
           <div class="card shadow-sm">
             <div class="card-body">
@@ -23,13 +24,24 @@
               <p class="card-text">Дата: {{ appointment.end_date | truncatechars:100 }} </p>
                <p class="card-footer">
                     </p>
-              <div class="btn-group">
+
+                {%if user.is_authenticated is True %}
+                {%if user.is_staff is True %}
+                <div class="btn-group">
                     <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment_update' appointment.pk %}" role="button">Редактировать</a>
                   <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment' appointment.pk %}" role="button">Подробно</a>
                   <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment_delete' appointment.pk %}" role="button">Удалить</a>
+                    </div>
+                {% else %}
+                <div class="btn-group">
+                    <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment_update' appointment.pk %}" role="button">Записаться</a>
+                  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment' appointment.pk %}" role="button">Подробно</a>
                 </div>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
+                     {% endif %}
+                {% endif %}
+                    {% endif %}
                 </div>
               </div>
             </div>
