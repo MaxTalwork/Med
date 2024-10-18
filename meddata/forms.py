@@ -29,4 +29,4 @@ class DoctorForm(StyleFormMixin, ModelForm):
 class AppointmentForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Appointment
-        fields = "__all__"
+        fields = ('client',)

@@ -2,53 +2,58 @@
 {% load my_tags %}
 {% block content %}
 
-<section class="py-5 text-center container">
+<section class="py-0 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-12 col-md-8 mx-auto">
-        <h1 class="fw-light">Запись</h1>
-      </div>
-    </div>
-  </section>
-
-<div class="album py-5 bg-body-tertiary">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for appointment in object_list %}
-          {%if appointment.client is NULL or user == apointment.client or user.is_staff is True or user == object.doctor%}
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <p class="card-text">Услуга: {{ appointment.med_service | truncatechars:100 }} </p>
-              <p class="card-text">Врач: {{ appointment.doctor | truncatechars:100 }} </p>
-              <p class="card-text">Направление: {{ appointment.med_branch.name | truncatechars:100 }} </p>
-              <p class="card-text">Дата: {{ appointment.end_date | truncatechars:100 }} </p>
-               <p class="card-footer">
-                    </p>
-
-                {%if user.is_authenticated is True %}
-                {%if user.is_staff is True %}
-                <div class="btn-group">
-                    <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment_update' appointment.pk %}" role="button">Редактировать</a>
-                  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment' appointment.pk %}" role="button">Подробно</a>
-                  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment_delete' appointment.pk %}" role="button">Удалить</a>
-                    </div>
-                {% else %}
-                <div class="btn-group">
-                    <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment_update' appointment.pk %}" role="button">Записаться</a>
-                  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:appointment' appointment.pk %}" role="button">Подробно</a>
-                </div>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                     {% endif %}
-                {% endif %}
-                    {% endif %}
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="col-lg-12 col-md-8 mx-auto">
+            <h1 class="fw-light">Запись на услуги</h1>
+            {%if user.is_authenticated is False %}
+            <h1 class="fw-light">Для записи необходима авторизация</h1>
+            {% endif %}
         </div>
-        {% endfor %}
-      </div>
     </div>
-  </div>
+</section>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Направление</th>
+        <th scope="col">Услуга</th>
+        <th scope="col">Врач</th>
+        <th scope="col">Дата</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for appointment in object_list %}
+    {%if appointment.client is NULL or user.is_staff %}
+    <tr>
+        <td>{{ appointment.med_branch}}</td>
+        <td>{{ appointment.med_service}}</td>
+        <td>{{ appointment.doctor}}</td>
+        <td>{{ appointment.end_date}}</td>
+        {%if user.is_authenticated %}
+        <td><div class="btn-group">
+                            <a class="btn btn-dark rounded-pill px-3"
+                               href="{% url 'meddata:appointment_update' appointment.pk %}"
+                               role="button">Записаться</a></td>
+        {%if appointment.client == user or appointment.doctor == user or user.is_staff %}
+        <td><div class="btn-group">
+                            <a class="btn btn-dark rounded-pill px-3"
+                               href="{% url 'meddata:appointment' appointment.pk %}"
+                               role="button">Подробно</a></td>
+        {% endif %}
+        {%if user.is_staff %}
+                <td><div class="btn-group">
+                            <a class="btn btn-dark rounded-pill px-3"
+                               href="{% url 'meddata:appointment_delete' appointment.pk %}"
+                               role="button">Удалить</a></td>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
 {% endblock %}

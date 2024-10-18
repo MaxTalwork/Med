@@ -123,7 +123,7 @@ class AppointmentDetailView(DetailView):
 
 class AppointmentUpdateView(UpdateView):
     model = Appointment
-    form_class = MedServiceForm
+    form_class = AppointmentForm
     success_url = reverse_lazy("meddata:appointment_list")
 
 

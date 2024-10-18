@@ -1,31 +1,43 @@
 {% extends 'meddata/main.html' %}
 {% load my_tags %}
 {% block content %}
-<section class="py-5 text-center container">
+<section class="py-0 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-12 col-md-8 mx-auto">
-        <h1 class="fw-light">Услуги</h1>
-      </div>
-    </div>
-  </section>
-
-<div class="album py-5 bg-body-tertiary">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{{ object.preview | media_filter }}">
-            <div class="card-body">
-              <p class="card-text">{{ object.name | truncatechars:100 }} </p>
-                    <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_list' %}" role="button">Назад</a>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="col-lg-12 col-md-8 mx-auto">
+            <h1 class="fw-light">{{ object.name }}</h1>
         </div>
-      </div>
     </div>
-  </div>
+</section>
+
+<div class="card" style="width: 68rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ object.description }}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{object.med_branch.name}}</h6>
+        <p class="card-text">Стоимость: {{ object.price | truncatechars:100 }} руб </p>
+
+    </div>
+    <p class="card-footer py-0">
+        {%if user.is_authenticated is True %}
+        {%if user.is_staff is True %}
+    <div class="btn-group py-0">
+        <a href="{% url 'meddata:appointment_list' %}" class="btn btn-dark rounded-pill px-3">Запись на
+            услугу</a>
+        <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_list' %}"
+           role="button">Назад</a>
+        <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_update' medservice.pk %}"
+           role="button">Редактировать</a>
+        <a class="btn btn-dark rounded-pill px-3"
+           href="{% url 'meddata:medservice_delete' medservice.pk %}" role="button">Удалить</a>
+    </div>
+    {% else %}
+    <a href="{% url 'meddata:appointment_list' %}" class="btn btn-dark rounded-pill px-3">Запись на
+        услугу</a>
+    <div class="btn-group py-0">
+        <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_list' %}"
+           role="button">Назад</a>
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+
 {% endblock %}
