@@ -6,12 +6,12 @@ NULLABLE = {"blank": True, "null": True}
 
 
 class MedBranch(models.Model):
-    name = models.CharField(max_length=100, verbose_name="Направление медицыны")
-    description = models.TextField(verbose_name="Направление медицыны", **NULLABLE)
+    name = models.CharField(max_length=100, verbose_name="Направление медицины")
+    description = models.TextField(verbose_name="Направление медицины", **NULLABLE)
 
     class Meta:
-        verbose_name = "Направление медицыны"
-        verbose_name_plural = "Направления медицыны"
+        verbose_name = "Направление медицины"
+        verbose_name_plural = "Направления медицины"
 
     def __str__(self):
         return f"{self.name}"
@@ -39,7 +39,7 @@ class Doctor(models.Model):
     patronymic = models.CharField(max_length=100, verbose_name="отчество", **NULLABLE)
     biography = models.TextField(verbose_name="биография", **NULLABLE)
     med_branch = models.ForeignKey(MedBranch, on_delete=models.SET_NULL, **NULLABLE)
-    appointments = models.TextField(verbose_name="записи на приём", **NULLABLE)
+    # appointments = models.TextField(verbose_name="записи на приём", **NULLABLE)
     image = models.ImageField(
         upload_to="doctors/foto",
         **NULLABLE,

@@ -2,7 +2,7 @@ import random
 import secrets
 import string
 
-from django.contrib.auth.views import PasswordResetView, LogoutView
+from django.contrib.auth.views import LogoutView, PasswordResetView
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render, resolve_url
 from django.urls import reverse, reverse_lazy
@@ -63,6 +63,7 @@ def reset_password(request):
 
 class UserLogoutView(LogoutView):
     """make logout available via GET"""
+
     http_method_names = ["get", "post", "options"]
 
     def get(self, request, *args, **kwargs):

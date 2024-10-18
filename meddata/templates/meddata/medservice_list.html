@@ -2,46 +2,49 @@
 {% load my_tags %}
 {% block content %}
 
-<section class="py-5 text-center container">
+<section class="py-0 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-12 col-md-8 mx-auto">
-        <h1 class="fw-light">Услуги</h1>
-      </div>
-    </div>
-  </section>
-
-<div class="album py-5 bg-body-tertiary">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for service in object_list %}
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <p class="card-text">Услуга: {{ service.name | truncatechars:100 }} </p>
-              <p class="card-text">Описание: {{ service.description | truncatechars:100 }} </p>
-              <p class="card-text">Направление: {{ service.med_branch.name | truncatechars:100 }} </p>
-              <p class="card-text">Врачи: {{ service.doctors | truncatechars:100 }} </p>
-              <p class="card-text">Стоимость: {{ service.price | truncatechars:100 }} руб </p>
-               <p class="card-footer">
-                    </p>
-               {%if user.is_authenticated is True %}
-                 {%if user.is_staff is True %}
-               <div class="btn-group">
-                    <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_update' service.pk %}" role="button">Редактировать</a>
-                  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice' service.pk %}" role="button">Подробно</a>
-                  <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice_delete' service.pk %}" role="button">Удалить</a>
-               </div>
-                 {% endif %}
-                {% endif %}
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="col-lg-12 col-md-8 mx-auto">
+            <h1 class="fw-light">Услуги</h1>
         </div>
-        {% endfor %}
-      </div>
     </div>
-  </div>
+</section>
+
+<div class="album py-1 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-0 g-0">
+            {% for service in object_list %}
+            <div class="col">
+
+                <div class="card" style="width: 68rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Услуга: {{ service.name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">{{service.med_branch.name}}</h6>
+                        <p class="card-text">Описание: {{ service.description }} </p>
+                        <p class="card-text">Стоимость: {{ service.price | truncatechars:100 }} руб </p>
+                        <a href="{% url 'meddata:medservice' service.pk %}" class="btn btn-dark rounded-pill px-3">Подробнее
+                            об услуге</a>
+                        <a href="{% url 'meddata:appointment_list' %}" class="btn btn-dark rounded-pill px-3">Запись на
+                            услугу</a>
+                    </div>
+                    <p class="card-footer py-0">
+                        {%if user.is_authenticated is True %}
+                        {%if user.is_staff is True %}
+                    <div class="btn-group py-0">
+                        <a class="btn btn-dark rounded-pill px-3"
+                           href="{% url 'meddata:medservice_update' service.pk %}" role="button">Редактировать</a>
+                        <a class="btn btn-dark rounded-pill px-3" href="{% url 'meddata:medservice' service.pk %}"
+                           role="button">Подробно</a>
+                        <a class="btn btn-dark rounded-pill px-3"
+                           href="{% url 'meddata:medservice_delete' service.pk %}" role="button">Удалить</a>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
