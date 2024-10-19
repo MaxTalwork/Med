@@ -2,15 +2,15 @@ import random
 import secrets
 import string
 
-from django.contrib.auth.views import LogoutView, PasswordResetView
+from django.contrib.auth.views import LogoutView
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render, resolve_url
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, DetailView
 
 from config import settings
 from config.settings import EMAIL_HOST_USER
-from users.forms import UserRegForm
+from users.forms import UserRegForm, UserForm
 from users.models import User
 
 
@@ -76,3 +76,18 @@ def my_logout_then_login(request, login_url=None):
     """
     login_url = resolve_url(settings.LOGOUT_REDIRECT_URL)
     return UserLogoutView.as_view(next_page=login_url)(request)
+
+
+class UserUpdateView(UpdateView):
+    model = User
+    form_class = UserForm
+    success_url = reverse_lazy("meddata:doctor_list")
+
+
+class UserDetailView(DetailView):
+    model = User
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.save()
+        return self.object

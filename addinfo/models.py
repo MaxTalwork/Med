@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 NULLABLE = {"blank": True, "null": True}
@@ -36,3 +38,31 @@ class ComText(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+
+class Feedback(models.Model):
+    STATUSES = [("New", "Новая"), ("InProgress", "В работе"), ("Complete", "Заверешена")]
+    title = models.CharField(max_length=100, verbose_name="Тема обращения", **NULLABLE)
+    description = models.TextField(
+        verbose_name="Ваше обращение", **NULLABLE
+    )
+    surname = models.CharField(max_length=100, verbose_name="Ваша фамилия", **NULLABLE)
+    contact_name = models.CharField(max_length=100, verbose_name="Ваше имя", **NULLABLE)
+    phone_number = models.CharField(
+        max_length=15,
+        verbose_name="Номер телефона",
+        **NULLABLE,
+        help_text="Введите номер телефона",
+    )
+    email = models.EmailField(verbose_name="Адрес эл. почты", **NULLABLE)
+    feedback = models.TextField(
+        verbose_name="Ваше обращение", **NULLABLE
+    )
+    status = models.CharField(choices=STATUSES, default="Новая", verbose_name="Статус")
+
+    class Meta:
+        verbose_name = "Форма обратной связи"
+        verbose_name_plural = "Формы обратной связи"
+
+    def __str__(self):
+        return f"{self.id} {self.title}"

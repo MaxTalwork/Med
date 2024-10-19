@@ -1,0 +1,70 @@
+{% extends 'meddata/main.html' %}
+{% load my_tags %}
+{% block content %}
+
+<section class="py-0 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-12 col-md-8 mx-auto">
+            <h1 class="fw-light">Обращения</h1>
+            {%if user.is_authenticated is False %}
+            <h1 class="fw-light">Для просмотра ваших обращений необходима авторизация</h1>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="py-0 text-center container">
+    <div class="row py-lg-5">
+        <div class="btn-group">
+            <a class="btn btn-dark rounded-pill px-3"
+               href="{% url 'addinfo:feedback_create' %}"
+               role="button">Написать обращение</a></div>
+    </div>
+</section>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Номер обращения</th>
+        <th scope="col">"Тема обращения"</th>
+        <th scope="col">Фамилия и Имя клиента</th>
+        <th scope="col">Номер телефона</th>
+        <th scope="col">Адрес эл. почты</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for feedback in object_list %}
+    {%if feedback.status != "Complete" %}
+    {%if user.is_authenticated %}
+    {%if user.is_staff or user.email == feedback.email %}
+    <tr>
+        <td>{{ feedback.id }}</td>
+        <td>{{ feedback.title }}</td>
+        <td>{{ feedback.surname }} {{ feedback.contact_name }}</td>
+        <td>{{ feedback.phone_number }}</td>
+        <td>{{ feedback.email }}</td>
+        <td>
+            <div class="btn-group">
+                <a class="btn btn-dark rounded-pill px-3"
+                   href="{% url 'addinfo:feedback' feedback.pk %}"
+                   role="button">Подробно</a></div>
+        </td>
+
+        {%if user.is_staff %}
+        <td>
+            <div class="btn-group">
+                <a class="btn btn-dark rounded-pill px-3"
+                   href="{% url 'addinfo:feedback_delete' feedback.pk %}"
+                   role="button">Удалить</a></div>
+        </td>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
