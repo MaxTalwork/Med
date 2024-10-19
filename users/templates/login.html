@@ -10,17 +10,18 @@
                         {% csrf_token %}
                         {{ form.as_p }}
                     </div>
-                    <div class="btn-group">
-                        <a type="submit" class="btn btn-dark rounded-pill px-3">
-                            Войти
-                        </a>
-                        <a type="submit" class="btn btn-dark rounded-pill px-3"
-                           href="{% url 'users:reset_password' %}">Сбросить пароль
-                        </a>
+                    <div> <button
+                        type="submit" class="btn btn-dark rounded-pill px-3"
+                        >Войти
+                        </button>
+                <button type="submit" class="btn btn-dark rounded-pill px-3" href="{% url 'users:reset_password' %}"
+                >Сбросить пароль
+            </button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
+</div>
 </div>
 {% endblock %}
