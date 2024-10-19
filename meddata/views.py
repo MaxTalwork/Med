@@ -3,7 +3,8 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
-from meddata.forms import AppointmentForm, DoctorForm, MedServiceForm, ClientAppointmentForm
+from meddata.forms import (AppointmentForm, ClientAppointmentForm, DoctorForm,
+                           MedServiceForm)
 from meddata.models import Appointment, Doctor, MedService
 
 

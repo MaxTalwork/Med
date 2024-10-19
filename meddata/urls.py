@@ -5,11 +5,12 @@ from meddata.apps import MeddataConfig
 from meddata.models import MedService
 from meddata.views import (AppointmentCreateView, AppointmentDeleteView,
                            AppointmentDetailView, AppointmentListView,
-                           AppointmentUpdateView, DoctorCreateView,
-                           DoctorDeleteView, DoctorDetailView, DoctorListView,
-                           DoctorUpdateView, MedServiceCreateView,
-                           MedServiceDeleteView, MedServiceDetailView,
-                           MedServiceListView, MedServiceUpdateView, home, ClientAppointmentUpdateView)
+                           AppointmentUpdateView, ClientAppointmentUpdateView,
+                           DoctorCreateView, DoctorDeleteView,
+                           DoctorDetailView, DoctorListView, DoctorUpdateView,
+                           MedServiceCreateView, MedServiceDeleteView,
+                           MedServiceDetailView, MedServiceListView,
+                           MedServiceUpdateView, home)
 
 app_name = MeddataConfig.name
 urlpatterns = [
@@ -39,7 +40,6 @@ urlpatterns = [
     path("doctor/create/", DoctorCreateView.as_view(), name="doctor_create"),
     path("doctor/<int:pk>/update/", DoctorUpdateView.as_view(), name="doctor_update"),
     path("doctor/<int:pk>/delete/", DoctorDeleteView.as_view(), name="doctor_delete"),
-
     path("appointment_list/", AppointmentListView.as_view(), name="appointment_list"),
     path(
         "appointment/<int:pk>/",

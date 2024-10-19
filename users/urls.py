@@ -1,10 +1,11 @@
 from django.contrib.auth.views import LoginView
-from django.views.decorators.cache import cache_page
 from django.urls import path
+from django.views.decorators.cache import cache_page
 
 from users.apps import UsersConfig
-from users.views import (UserCreateView, UserLogoutView, email_verification,
-                         my_logout_then_login, reset_password, UserUpdateView, UserDetailView)
+from users.views import (UserCreateView, UserDetailView, UserLogoutView,
+                         UserUpdateView, email_verification,
+                         my_logout_then_login, reset_password)
 
 app_name = UsersConfig.name
 urlpatterns = [
