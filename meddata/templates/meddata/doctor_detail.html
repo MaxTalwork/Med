@@ -13,16 +13,12 @@
 <div class="card mb-6" style="max-width: 1140px;">
     <div class="row g-0">
         <div class="col-md-4">
-            <img src="{{ doctor.image | media_filter}}" class="img-fluid rounded-start" alt="...">
+            <img src="{{ doctor.image | media_filter}}" class="rounded mx-auto d-block" alt="..." height="300">
         </div>
         <div class="col-md-8">
             <div class="card-body">
                 <h2 class="card-title">{{ object.biography }}</h2>
                 <p class="card-text">Направление: {{ object.med_branch.name }}</p>
-                <p class="card-footer"></p>
-
-                <p class="card-text">Записи: {%if object is appointment.doctor %}{{ appointment }} {% endif %}</p>
-
                 <p class="card-footer"></p>
                 {%if user.is_staff %}
                 <div class="btn-group">

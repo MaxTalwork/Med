@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.forms import BooleanField, ModelForm
 
-from addinfo.models import ComText
+from addinfo.models import ComText, Feedback
 
 
 class StyleFormMixin(ModelForm):
@@ -17,4 +17,10 @@ class StyleFormMixin(ModelForm):
 class ComTextForm(StyleFormMixin, ModelForm):
     class Meta:
         model = ComText
+        fields = "__all__"
+
+
+class FeedbackForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Feedback
         fields = "__all__"

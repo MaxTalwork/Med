@@ -4,31 +4,31 @@
 
 <section class="py-5 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-12 col-md-8 mx-auto">
-        <h1 class="fw-light">Врачи</h1>
-      </div>
+        <div class="col-lg-12 col-md-8 mx-auto">
+            <h1 class="fw-light">Врачи</h1>
+        </div>
     </div>
-  </section>
+</section>
 
 <div class="container">
-  <form class="row" method="post" enctype="multipart/form-data">
-    <div class="row">
-      <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              {% csrf_token %}
-              {{ form.as_p }}
+    <form class="row" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-dark rounded-pill px-3">
+                        {% if object %}
+                        Сохранить
+                        {% else %}
+                        Создать
+                        {% endif %}
+                    </button>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">
-              {% if object %}
-              Сохранить
-              {% else %}
-              Создать
-              {% endif %}
-            </button>
-          </div>
-      </div>
-    </div>
-  </form>
+        </div>
+    </form>
 </div>
 {% endblock %}

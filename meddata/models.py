@@ -28,6 +28,7 @@ class MedService(models.Model):
     class Meta:
         verbose_name = "Услуга"
         verbose_name_plural = "Услуги"
+        ordering = ["med_branch", "name"]
 
     def __str__(self):
         return f"{self.name}"
@@ -49,6 +50,7 @@ class Doctor(models.Model):
     class Meta:
         verbose_name = "Врач"
         verbose_name_plural = "Врачи"
+        ordering = ["surname", "name", "patronymic"]
 
     def __str__(self):
         return f"{self.surname} {self.name} {self.patronymic}"
@@ -69,6 +71,7 @@ class Appointment(models.Model):
     class Meta:
         verbose_name = "Запись"
         verbose_name_plural = "Записи"
+        ordering = ["med_service", "end_date"]
 
     def __str__(self):
         return f"{self.med_service}, {self.doctor}, {self.med_branch}, {self.client}"

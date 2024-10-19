@@ -2,36 +2,25 @@
 {% load my_tags %}
 {% block content %}
 <div class="container">
-  <form class="row" method="post" enctype="multipart/form-data">
-    <div class="row">
-      <div class="col-6">
-          <div class="card">
-            <div class="card-body">
-              {% csrf_token %}
-              {{ form.as_p }}
+    <form class="row" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </div>
+                    <div class="btn-group">
+                        <a type="submit" class="btn btn-dark rounded-pill px-3">
+                            Войти
+                        </a>
+                        <a type="submit" class="btn btn-dark rounded-pill px-3"
+                           href="{% url 'users:reset_password' %}">Сбросить пароль
+                        </a>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">
-                Войти
-            </button>
-          </div>
-      </div>
-    </div>
-  </form>
-</div>
-<div class="container">
-  <form class="row" method="post" enctype="multipart/form-data">
-    <div class="row">
-      <div class="col-6">
-          <div class="card-body">
-              <div class="card-body">
-              {% csrf_token %}
-            </div>
-            <button type="submit" class="btn btn-primary">
-                <a href="{% url 'users:reset_password' %}">Сбросить пароль</a>
-            </button>
-          </div>
-      </div>
-    </div>
-  </form>
+        </div>
+    </form>
 </div>
 {% endblock %}

@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
-from meddata.forms import AppointmentForm, DoctorForm, MedServiceForm
+from meddata.forms import AppointmentForm, DoctorForm, MedServiceForm, ClientAppointmentForm
 from meddata.models import Appointment, Doctor, MedService
 
 
@@ -124,6 +124,12 @@ class AppointmentDetailView(DetailView):
 class AppointmentUpdateView(UpdateView):
     model = Appointment
     form_class = AppointmentForm
+    success_url = reverse_lazy("meddata:appointment_list")
+
+
+class ClientAppointmentUpdateView(UpdateView):
+    model = Appointment
+    form_class = ClientAppointmentForm
     success_url = reverse_lazy("meddata:appointment_list")
 
 

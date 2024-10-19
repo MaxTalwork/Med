@@ -9,7 +9,7 @@ from meddata.views import (AppointmentCreateView, AppointmentDeleteView,
                            DoctorDeleteView, DoctorDetailView, DoctorListView,
                            DoctorUpdateView, MedServiceCreateView,
                            MedServiceDeleteView, MedServiceDetailView,
-                           MedServiceListView, MedServiceUpdateView, home)
+                           MedServiceListView, MedServiceUpdateView, home, ClientAppointmentUpdateView)
 
 app_name = MeddataConfig.name
 urlpatterns = [
@@ -55,6 +55,11 @@ urlpatterns = [
         "appointment/<int:pk>/update/",
         AppointmentUpdateView.as_view(),
         name="appointment_update",
+    ),
+    path(
+        "appointment/<int:pk>/update/",
+        ClientAppointmentUpdateView.as_view(),
+        name="client_appointment_update",
     ),
     path(
         "appointment/<int:pk>/delete/",
